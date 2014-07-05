@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Emscripten-Generated Code</title>
+    <style>
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      textarea.emscripten { font-family: monospace; width: 80%; }
+      div.emscripten { text-align: center; }
+      div.emscripten_border { border: 1px solid black; }
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      canvas { border: 0px none; }
+    </style>
+  </head>
+  <body>
+  	<canvas id="canvas" width="1020" height="612">
+  	<script>
+  		Module = {
+  			print: function (text) {console.log(text);}
+  			//stdout: function (ptr) {return ptr;console.log(ptr);}
+  		};
+  	</script>
+  	<script src="mine.js"></script>
+  	<script>
+  	
+  		var canvas = document.getElementById("canvas");
+  		var game = new Module.Game(canvas);
+  		
+  		canvas.addEventListener('contextmenu',
+  			function(event) {
+  				event.preventDefault();
+  				game.altClick(event.x - canvas.offsetLeft, event.y - canvas.offsetTop);
+  				return false;
+  			}, false);
+  			
+  		canvas.addEventListener('click',
+  			function(event) {
+  				event.preventDefault();
+  				game.click(event.x - canvas.offsetLeft, event.y - canvas.offsetTop);
+  				return false;
+  			}, false);
+  			
+  		game.newBoard(16, 30, 50);
+
+  	</script>
+  </body>
+</html>
